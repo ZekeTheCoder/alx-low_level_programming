@@ -1,6 +1,7 @@
-## 0x04-more_functions_nested_loops  
+### 0x04-more_functions_nested_loops  
     
-#### Mandatory Tasks  
+#### Mandatory Tasks (11)  
+
 File: 0-isupper.c - Write a function that checks for uppercase character.  
 File: 1-isdigit.c - Write a function that checks for a digit (0 through 9).  
 File: 2-mul.c - Write a function that multiplies two integers.  
@@ -13,6 +14,10 @@ File: 8-print_square.c - Write a function that prints a square.
 File: 9-fizz_buzz.c - Write a program that prints the numbers from 1 to 100.  
 - But for multiples of three print Fizz instead of the number and for the multiples of five print Buzz.  
 - For numbers which are multiples of both three and five print FizzBuzz.  
+
 File: 10-print_triangle.c - Write a function that prints a triangle.  
   
+#### Advanced Tasks (2) 
 
+File: 100-prime_factor.c - Write a program that finds and prints the largest prime factor of the number 612852475143.  
+File: 101-print_number.c - Write a function that prints an integer.    
