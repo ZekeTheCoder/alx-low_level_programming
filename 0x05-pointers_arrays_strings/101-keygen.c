@@ -21,7 +21,11 @@ int main(void)
 		if ((sum + random) > 2772)
 			break;
 		sum = sum + random;
-		printf("%c", random);
+
+		if (sum <= 2772)
+		{
+			printf("%c", random);
+		}
 	}
 
 	finalChar = 2772 - sum;
