@@ -10,18 +10,18 @@
 
 int main(void)
 {
-	int sum;
-	char c;
+	int random = 0, sum = 0;
+	time_t t;
 
-	srand(time(NULL));
-
-	while (sum <= 2645)
+	srand((unsigned int)time(&t));
+	while (sum < 2772)
 	{
-		c = rand() % 128;
-		sum += c;
-		putchar(c);
+		random = rand() % 128;
+		if ((sum + random) > 2772)
+			break;
+		sum = sum + random;
+		printf("%c", random);
 	}
-
-	putchar(2772 - sum);
+	printf("%c\n", (2772 - sum));
 	return (0);
 }
