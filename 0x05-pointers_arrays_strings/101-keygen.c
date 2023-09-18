@@ -16,12 +16,22 @@ int main(void)
 	srand((unsigned int)time(&t));
 	while (sum < 2772)
 	{
-		random = rand() % 128;
+		random = rand() % 95 + 32;
+
 		if ((sum + random) > 2772)
 			break;
 		sum = sum + random;
 		printf("%c", random);
 	}
-	printf("%c\n", (2772 - sum));
+
+	int finalChar = 2772 - sum;
+
+	if (finalChar < 32)
+		finalChar = 32;
+	else if (finalChar > 126)
+		finalChar = 126;
+
+	printf("%c\n", finalChar);
+
 	return (0);
 }
