@@ -10,7 +10,7 @@
 
 int main(void)
 {
-	int random = 0, sum = 0;
+	int random = 0, sum = 0, finalChar;
 	time_t t;
 
 	srand((unsigned int)time(&t));
@@ -24,7 +24,7 @@ int main(void)
 		printf("%c", random);
 	}
 
-	int finalChar = 2772 - sum;
+	finalChar = 2772 - sum;
 
 	if (finalChar < 32)
 		finalChar = 32;
