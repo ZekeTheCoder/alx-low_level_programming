@@ -1,0 +1,24 @@
+#include "main.h"
+#include <stdlib.h>
+
+/**
+ * free_grid - frees a 2 dimensional grid.
+ * previously created by my alloc_grid function
+ *
+ * @grid: multidimensional array of integers.
+ * @height: height of the grid.
+ *
+ * Return: no return
+ */
+
+void free_grid(int **grid, int height)
+{
+	int i;
+
+	if (grid != NULL && height != 0)
+	{
+		for (i = height - 1; i >= 0; i--)
+			free(grid[height]);
+		free(grid);
+	}
+}
