@@ -37,6 +37,25 @@ void _is_zero(char *argv[])
 }
 
 /**
+ * _initialize_array - set memery to zero in a new array
+ *
+ * @ar: char array.
+ * @lar: length of the char array.
+ *
+ * Return: pointer of a char array.
+ */
+
+char *_initialize_array(char *ar, int lar)
+{
+	int i = 0;
+
+	for (i = 0; i < lar; i++)
+		ar[i] = '0';
+	ar[lar] = '\0';
+	return (ar);
+}
+
+/**
  * _checknum - determines length of the number
  * and checks if number is in base 10.
  *
@@ -58,25 +77,6 @@ int _checknum(char *argv[], int n)
 		}
 
 	return (ln);
-}
-
-/**
- * _initialize_array - set memery to zero in a new array
- *
- * @ar: char array.
- * @lar: length of the char array.
- *
- * Return: pointer of a char array.
- */
-
-char *_initialize_array(char *ar, int lar)
-{
-	int i = 0;
-
-	for (i = 0; i < lar; i++)
-		ar[i] = '0';
-	ar[lar] = '\0';
-	return (ar);
 }
 
 /**
