@@ -8,4 +8,4 @@
 
 #### Advanced (2)
 - File: 100-realloc.c - Write a function that reallocates a memory block using malloc and free
-- File: 101-mul.c - Write a program that multiplies two positive numbers.
+
