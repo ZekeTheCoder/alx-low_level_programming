@@ -7,6 +7,79 @@
 #include <elf.h>
 
 /**
+ * print_magic - prints the ELF magic bytes.
+ * @ptr: magic.
+ * Return: no return.
+ */
+void print_magic(char *ptr)
+{
+	int bytes;
+
+	printf("  Magic:  ");
+
+	for (bytes = 0; bytes < 16; bytes++)
+		printf(" %02x", ptr[bytes]);
+
+	printf("\n");
+}
+
+/**
+ * print_data - prints the data encoding (endianess).
+ * @ptr: magic.
+ * Return: no return.
+ */
+void print_data(char *ptr)
+{
+	char data = ptr[5];
+
+	printf("  Data:                              2's complement");
+	if (data == 1)
+		printf(", little endian\n");
+
+	if (data == 2)
+		printf(", big endian\n");
+}
+
+/**
+ * print_version - prints the ELF version
+ * @ptr: magic.
+ * Return: no return.
+ */
+void print_version(char *ptr)
+{
+	int version = ptr[6];
+
+	printf("  Version:                           %d", version);
+
+	if (version == EV_CURRENT)
+		printf(" (current)");
+
+	printf("\n");
+}
+
+/**
+ * print_osabi - prints the OS/ABI.
+ * @ptr: magic.
+ * Return: no return.
+ */
+void print_osabi(char *ptr)
+{
+	char osabi = ptr[7];
+
+	printf("  OS/ABI:                            ");
+	if (osabi == 0)
+		printf("UNIX - System V\n");
+	else if (osabi == 2)
+		printf("UNIX - NetBSD\n");
+	else if (osabi == 6)
+		printf("UNIX - Solaris\n");
+	else
+		printf("<unknown: %x>\n", osabi);
+
+	printf("  ABI Version:                       %d\n", ptr[8]);
+}
+
+/**
  * print_addr - the entry point address.
  * @ptr: magic.
  * Return: no return.
@@ -80,76 +153,22 @@ void print_type(char *ptr)
 }
 
 /**
- * print_osabi - prints the OS/ABI.
+ * check_elf - checks if the file is a valid ELF file
+ * based on the ELF magic bytes.
  * @ptr: magic.
- * Return: no return.
+ * Return: 1 if it is an elf file. 0 if not.
  */
-void print_osabi(char *ptr)
+int check_elf(char *ptr)
 {
-	char osabi = ptr[7];
+	int addr = (int)ptr[0];
+	char E = ptr[1];
+	char L = ptr[2];
+	char F = ptr[3];
 
-	printf("  OS/ABI:                            ");
-	if (osabi == 0)
-		printf("UNIX - System V\n");
-	else if (osabi == 2)
-		printf("UNIX - NetBSD\n");
-	else if (osabi == 6)
-		printf("UNIX - Solaris\n");
-	else
-		printf("<unknown: %x>\n", osabi);
+	if (addr == 127 && E == 'E' && L == 'L' && F == 'F')
+		return (1);
 
-	printf("  ABI Version:                       %d\n", ptr[8]);
-}
-
-/**
- * print_version - prints the ELF version
- * @ptr: magic.
- * Return: no return.
- */
-void print_version(char *ptr)
-{
-	int version = ptr[6];
-
-	printf("  Version:                           %d", version);
-
-	if (version == EV_CURRENT)
-		printf(" (current)");
-
-	printf("\n");
-}
-
-/**
- * print_data - prints the data encoding (endianess).
- * @ptr: magic.
- * Return: no return.
- */
-void print_data(char *ptr)
-{
-	char data = ptr[5];
-
-	printf("  Data:                              2's complement");
-	if (data == 1)
-		printf(", little endian\n");
-
-	if (data == 2)
-		printf(", big endian\n");
-}
-
-/**
- * print_magic - prints the ELF magic bytes.
- * @ptr: magic.
- * Return: no return.
- */
-void print_magic(char *ptr)
-{
-	int bytes;
-
-	printf("  Magic:  ");
-
-	for (bytes = 0; bytes < 16; bytes++)
-		printf(" %02x", ptr[bytes]);
-
-	printf("\n");
+	return (0);
 }
 
 /**
@@ -179,25 +198,6 @@ void check_sys(char *ptr)
 	print_osabi(ptr);
 	print_type(ptr);
 	print_addr(ptr);
-}
-
-/**
- * check_elf - checks if the file is a valid ELF file
- * based on the ELF magic bytes.
- * @ptr: magic.
- * Return: 1 if it is an elf file. 0 if not.
- */
-int check_elf(char *ptr)
-{
-	int addr = (int)ptr[0];
-	char E = ptr[1];
-	char L = ptr[2];
-	char F = ptr[3];
-
-	if (addr == 127 && E == 'E' && L == 'L' && F == 'F')
-		return (1);
-
-	return (0);
 }
 
 /**
